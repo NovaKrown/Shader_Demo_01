@@ -29,6 +29,7 @@ const geometry = new THREE.PlaneGeometry(1, 1, 32, 32);
 
 // Material
 const material = new THREE.ShaderMaterial({
+  uniforms: { uTime: { value: 0 } },
   vertexShader: testVertexShader,
   fragmentShader: testFragmentShader,
   side: THREE.DoubleSide,
@@ -65,7 +66,7 @@ window.addEventListener("resize", () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-camera.position.set(0.25, -0.25, 1);
+camera.position.set(0, 0, 1);
 scene.add(camera);
 
 // Controls
@@ -91,12 +92,15 @@ const tick = () => {
   controls.update();
 
   const elapsedTime = clock.getElapsedTime();
-  const deltaTime = elapsedTime - oldElapsedTime;
-  oldElapsedTime = elapsedTime;
+
+  material.uniforms.uTime.value = elapsedTime;
+
+  // const deltaTime = elapsedTime - oldElapsedTime;
+  // oldElapsedTime = elapsedTime;
 
   // console.log(deltaTime, 1 / 60);
 
-  mesh.rotateY(deltaTime * 0.25);
+  // mesh.rotateY(deltaTime * 0.25);
 
   // Render
   renderer.render(scene, camera);
