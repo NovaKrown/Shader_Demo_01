@@ -9,7 +9,7 @@ import STATS from "three/examples/jsm/libs/stats.module.js";
  * Base
  */
 // Debug
-const gui = new GUI();
+// const gui = new GUI();
 const stats = new STATS();
 stats.showPanel(0);
 // stats.showPanel(1);
